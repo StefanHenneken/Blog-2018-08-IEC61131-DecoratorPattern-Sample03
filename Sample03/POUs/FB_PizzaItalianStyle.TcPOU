@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="FB_PizzaItalianStyle" Id="{544fb8f7-abc4-48db-b83e-66402b2145dc}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_PizzaItalianStyle IMPLEMENTS I_Pizza
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="GetDescription" Id="{9c935248-32b0-46aa-bb8d-93068080127c}">
+      <Declaration><![CDATA[METHOD GetDescription : STRING
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetDescription := 'Pizza Italian Style:';]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetPrice" Id="{6f8072c3-e000-430d-9e6f-606d9a40c2d7}">
+      <Declaration><![CDATA[METHOD GetPrice : LREAL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetPrice := 4.5;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_PizzaItalianStyle">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_PizzaItalianStyle.GetDescription">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_PizzaItalianStyle.GetPrice">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

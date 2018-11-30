@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="FB_DecoratorCheese" Id="{9ad8c55b-8edd-47dc-b2f2-450a6798519a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_DecoratorCheese EXTENDS FB_Decorator
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="GetDescription" Id="{982907fa-22f1-4520-92dd-1be191c4fdf4}">
+      <Declaration><![CDATA[METHOD GetDescription : STRING
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (SUPER^.ipSideOrder <> 0) THEN
+	GetDescription := CONCAT (SUPER^.ipSideOrder.GetDescription(), ' - Cheese');
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetPrice" Id="{bf93a2ab-e89a-430c-9a8f-8bbb7796ec9a}">
+      <Declaration><![CDATA[METHOD GetPrice : LREAL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (SUPER^.ipSideOrder <> 0) THEN
+	GetPrice := SUPER^.ipSideOrder.GetPrice() + 1.1;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_DecoratorCheese">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DecoratorCheese.GetDescription">
+      <LineId Id="10" Count="2" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DecoratorCheese.GetPrice">
+      <LineId Id="10" Count="2" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <Itf Name="I_Pizza" Id="{75d38bd0-716f-490c-807a-4daa8f26e0d3}">
+    <Declaration><![CDATA[INTERFACE I_Pizza
+]]></Declaration>
+    <Method Name="GetDescription" Id="{dd561ff2-195f-4c97-a177-50684d9b836f}">
+      <Declaration><![CDATA[METHOD GetDescription : STRING
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="GetPrice" Id="{edeb25c6-511a-430c-a4d9-e87e27c3eec1}">
+      <Declaration><![CDATA[METHOD GetPrice : LREAL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

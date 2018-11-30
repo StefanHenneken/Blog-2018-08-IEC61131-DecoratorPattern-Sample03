@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="FB_DecoratorTomato" Id="{6a23dffc-d9d0-4e5c-bc48-3acf097e19de}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_DecoratorTomato EXTENDS FB_Decorator
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	bWholefood		: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="bWholefoodProduct" Id="{65856119-ca3c-4762-90bd-46b97fff58cd}">
+      <Declaration><![CDATA[PROPERTY PUBLIC bWholefoodProduct : BOOL]]></Declaration>
+      <Get Name="Get" Id="{c62384ce-341e-41f3-b682-5c77937f6e2b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bWholefoodProduct := THIS^.bWholefood;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{80b4dbd7-5926-49ed-8080-9fa8569131ce}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[THIS^.bWholefood := bWholefoodProduct;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="FB_init" Id="{e7580572-2915-4701-a566-ac200c74698f}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains		: BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode			: BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ipSideOrder			: I_Pizza;
+	bWholefoodProduct	: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.bWholefood := bWholefoodProduct;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetDescription" Id="{56e36320-0678-448c-833e-b8dbe091013a}">
+      <Declaration><![CDATA[METHOD GetDescription : STRING
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (SUPER^.ipSideOrder <> 0) THEN
+	GetDescription := CONCAT (SUPER^.ipSideOrder.GetDescription(), ' - Tomato');
+	IF (THIS^.bWholefoodProduct) THEN
+	GetDescription := CONCAT (GetDescription, ' (WholefoodProduct) ');
+	END_IF
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetPrice" Id="{7a4344c4-2641-474b-9a89-327e457a43d6}">
+      <Declaration><![CDATA[METHOD GetPrice : LREAL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (SUPER^.ipSideOrder <> 0) THEN
+	GetPrice := SUPER^.ipSideOrder.GetPrice() + 0.9;
+	IF (THIS^.bWholefood) THEN
+		GetPrice := GetPrice + 0.3;
+	END_IF
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_DecoratorTomato">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DecoratorTomato.bWholefoodProduct.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DecoratorTomato.bWholefoodProduct.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DecoratorTomato.FB_init">
+      <LineId Id="8" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DecoratorTomato.GetDescription">
+      <LineId Id="10" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="17" Count="2" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DecoratorTomato.GetPrice">
+      <LineId Id="11" Count="1" />
+      <LineId Id="16" Count="2" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

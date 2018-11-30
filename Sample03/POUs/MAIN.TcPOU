@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="MAIN" Id="{c9752a19-1ec4-4b65-9b03-7aba295e5266}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	// Italian Pizza Margherita (via declaration)
+	fbItalianStyle				: FB_PizzaItalianStyle;
+	fbTomato					: FB_DecoratorTomato(fbItalianStyle, TRUE);
+	fbCheese					: FB_DecoratorCheese(fbTomato);
+	ipPizza						: I_Pizza := fbCheese;
+	
+	// Italian Pizza Margherita (via runtime)
+	(* fbItalianStyle			: FB_PizzaItalianStyle;
+	fbTomato					: FB_DecoratorTomato(0, FALSE);
+	fbCheese					: FB_DecoratorCheese(0);
+	ipPizza						: I_Pizza; *)
+	
+	bCreate						: BOOL;
+	fPrice						: LREAL;
+	sDescription				: STRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* IF (bCreate) THEN
+	bCreate := FALSE;
+	fbTomato.ipDecorator := fbItalianStyle;
+	fbCheese.ipDecorator := fbTomato;
+	ipPizza := fbCheese;
+END_IF *)
+
+IF (ipPizza <> 0) THEN
+	fPrice := ipPizza.GetPrice();
+	sDescription := ipPizza.GetDescription();
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="83" Count="1" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

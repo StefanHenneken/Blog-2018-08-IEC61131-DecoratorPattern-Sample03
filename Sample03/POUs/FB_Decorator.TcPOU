@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="FB_Decorator" Id="{bfa4a11a-0c97-446f-a048-14209d21dc7f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_Decorator IMPLEMENTS I_Pizza
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	ipSideOrder	: I_Pizza;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{f860e243-06dc-4c02-b222-b90e3c814283}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains	: BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode		: BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	ipSideOrder		: I_Pizza;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.ipSideOrder := ipSideOrder;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetDescription" Id="{f850d087-7b0d-4744-98fa-824641fa0d67}">
+      <Declaration><![CDATA[{warning 'add method implementation'}
+METHOD GetDescription : STRING
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetPrice" Id="{08a19f83-703c-4c0a-80fe-893334fb7c30}">
+      <Declaration><![CDATA[{warning 'add method implementation'}
+METHOD GetPrice : LREAL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ipDecorator" Id="{c618fb2b-b304-47b4-b86e-e54401a158b5}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ipDecorator : I_Pizza]]></Declaration>
+      <Get Name="Get" Id="{2c71dc2a-41ac-4e73-bdb1-25079fa15bcc}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ipDecorator := THIS^.ipSideOrder;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{d1ef92e7-23d1-4085-8594-79a261019e21}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[THIS^.ipSideOrder := ipDecorator;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="FB_Decorator">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Decorator.FB_init">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Decorator.GetDescription">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Decorator.GetPrice">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Decorator.ipDecorator.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Decorator.ipDecorator.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

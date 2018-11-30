@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="FB_DecoratorSalami" Id="{6d62391a-f1ad-4b41-af6e-12267a1c0c1a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_DecoratorSalami EXTENDS FB_Decorator
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="GetDescription" Id="{399edfb9-0cc8-456a-9308-bf7a7f21fd39}">
+      <Declaration><![CDATA[METHOD GetDescription : STRING
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (SUPER^.ipSideOrder <> 0) THEN
+	GetDescription := CONCAT (SUPER^.ipSideOrder.GetDescription(), ' - Salami');
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetPrice" Id="{7ebac5b8-38c0-40da-95fe-41daf1fd174a}">
+      <Declaration><![CDATA[METHOD GetPrice : LREAL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (SUPER^.ipSideOrder <> 0) THEN
+	GetPrice := SUPER^.ipSideOrder.GetPrice() + 1.4;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_DecoratorSalami">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DecoratorSalami.GetDescription">
+      <LineId Id="10" Count="2" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DecoratorSalami.GetPrice">
+      <LineId Id="8" Count="2" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
